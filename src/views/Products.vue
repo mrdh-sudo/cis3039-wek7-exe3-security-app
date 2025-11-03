@@ -15,8 +15,8 @@ watch(isAuthenticated, () => {
   fetchProducts(true);
 });
 
-const formatPrice = (p?: number) =>
-  p === undefined ? '—' : `£${(p / 100).toFixed(2)}`;
+const formatPrice = (p?: number | null) =>
+  p === undefined || p === null ? '—' : `£${(p / 100).toFixed(2)}`;
 </script>
 
 <template>
