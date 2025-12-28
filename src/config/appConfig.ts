@@ -8,14 +8,19 @@ export interface AppConfig {
 }
 
 export function loadAppConfig(): AppConfig {
-  const apiBaseUrl =
-    (import.meta.env.VITE_API_BASE_URL as string) ??
-    'http://localhost:7071/api/';
-  const domain = (import.meta.env.VITE_AUTH0_DOMAIN as string) ?? '';
-  const clientId = (import.meta.env.VITE_AUTH0_CLIENT_ID as string) ?? '';
-  const audience =
-    (import.meta.env.VITE_AUTH0_AUDIENCE as string | undefined) || undefined;
+  console.log('🚀 LOADING APP CONFIG - Environment Variables:');
+  console.log('   VITE_API_BASE_URL:', import.meta.env.VITE_API_BASE_URL || '(not set)');
+  console.log('   VITE_AUTH0_DOMAIN:', import.meta.env.VITE_AUTH0_DOMAIN || '(not set)');
+  console.log('   VITE_AUTH0_CLIENT_ID:', import.meta.env.VITE_AUTH0_CLIENT_ID ? '***' + import.meta.env.VITE_AUTH0_CLIENT_ID.slice(-6) : '(not set)');
+  console.log('   VITE_AUTH0_AUDIENCE:', import.meta.env.VITE_AUTH0_AUDIENCE || '(not set)');
+  
+  const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL as string) || 'http://localhost:7071/api/';
+  const domain = (import.meta.env.VITE_AUTH0_DOMAIN as string) || '';
+  const clientId = (import.meta.env.VITE_AUTH0_CLIENT_ID as string) || '';
+  const audience = (import.meta.env.VITE_AUTH0_AUDIENCE as string | undefined) || undefined;
 
+  console.log('✅ Final config:', { apiBaseUrl, domain, clientId: '***' + clientId.slice(-6), audience });
+  
   return {
     apiBaseUrl,
     auth0: { domain, clientId, audience },
